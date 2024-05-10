@@ -2,15 +2,15 @@ package com.dbserver.desafiovotacao.core.dtos;
 
 import com.dbserver.desafiovotacao.core.enums.EnumAgendaStatus;
 
-public class AgendaVoteDTO {
+public class AgendaResultDTO {
 
     private String agendaId;
 
-    private Integer totalVotes;
+    private Long totalVotes;
 
-    private Integer votesInFavor;
+    private Long votesInFavor;
 
-    private Integer votesAgains;
+    private Long votesAgainst;
 
     private EnumAgendaStatus status;
 
@@ -22,28 +22,28 @@ public class AgendaVoteDTO {
         this.agendaId = agendaId;
     }
 
-    public Integer getTotalVotes() {
+    public Long getTotalVotes() {
         return totalVotes;
     }
 
-    public void setTotalVotes(Integer totalVotes) {
+    public void setTotalVotes(Long totalVotes) {
         this.totalVotes = totalVotes;
     }
 
-    public Integer getVotesInFavor() {
+    public Long getVotesInFavor() {
         return votesInFavor;
     }
 
-    public void setVotesInFavor(Integer votesInFavor) {
+    public void setVotesInFavor(Long votesInFavor) {
         this.votesInFavor = votesInFavor;
     }
 
-    public Integer getVotesAgains() {
-        return votesAgains;
+    public Long getVotesAgainst() {
+        return votesAgainst;
     }
 
-    public void setVotesAgains(Integer votesAgains) {
-        this.votesAgains = votesAgains;
+    public void setVotesAgainst(Long votesAgainst) {
+        this.votesAgainst = votesAgainst;
     }
 
     public EnumAgendaStatus getStatus() {
