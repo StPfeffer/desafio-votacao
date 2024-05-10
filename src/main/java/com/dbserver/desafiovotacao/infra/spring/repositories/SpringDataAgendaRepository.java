@@ -1,4 +1,4 @@
-package com.dbserver.desafiovotacao.infra.spring.repositories.agenda;
+package com.dbserver.desafiovotacao.infra.spring.repositories;
 
 import com.dbserver.desafiovotacao.infra.postgres.models.PostgresAgenda;
 import org.springframework.data.jpa.repository.JpaRepository;
