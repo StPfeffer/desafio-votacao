@@ -1,9 +1,8 @@
 package com.dbserver.desafiovotacao.infra.postgres.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.dbserver.desafiovotacao.core.enums.EnumAgendaStatus;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,10 +18,16 @@ public class PostgresAgenda {
     @Column(name = "id")
     private UUID id;
 
+    @NotNull
     @Column(name = "title")
     private String title;
 
-    @Column(name = "description")
+    @Column(name = "description", length = 1000)
     private String description;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private EnumAgendaStatus status;
 
 }

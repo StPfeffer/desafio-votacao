@@ -11,6 +11,7 @@ public class AgendaMapper {
         dto.setId(bo.getId());
         dto.setTitle(bo.getTitle());
         dto.setDescription(bo.getDescription());
+        dto.setStatus(bo.getStatus());
 
         return dto;
     }
@@ -21,6 +22,7 @@ public class AgendaMapper {
         bo.setId(dto.getId());
         bo.setTitle(dto.getTitle());
         bo.setDescription(dto.getDescription());
+        bo.setStatus(dto.getStatus());
 
         return bo;
     }

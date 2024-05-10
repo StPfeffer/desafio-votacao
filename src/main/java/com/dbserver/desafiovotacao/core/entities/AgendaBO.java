@@ -1,5 +1,7 @@
 package com.dbserver.desafiovotacao.core.entities;
 
+import com.dbserver.desafiovotacao.core.enums.EnumAgendaStatus;
+
 public class AgendaBO {
 
     private String id;
@@ -7,6 +9,8 @@ public class AgendaBO {
     private String title;
 
     private String description;
+
+    private EnumAgendaStatus status;
 
     public String getId() {
         return id;
@@ -30,6 +34,14 @@ public class AgendaBO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public EnumAgendaStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(EnumAgendaStatus status) {
+        this.status = status;
     }
 
 }

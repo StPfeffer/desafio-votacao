@@ -13,6 +13,7 @@ public class PostgresAgendaMapper {
         domain.setId(entity.getId().toString());
         domain.setTitle(entity.getTitle());
         domain.setDescription(entity.getDescription());
+        domain.setStatus(entity.getStatus());
 
         return domain;
     }
@@ -23,6 +24,7 @@ public class PostgresAgendaMapper {
         entity.setId(domain.getId() == null ? UUID.randomUUID() : UUID.fromString(domain.getId()));
         entity.setTitle(domain.getTitle());
         entity.setDescription(domain.getDescription());
+        entity.setStatus(domain.getStatus());
 
         return entity;
     }
