@@ -31,7 +31,7 @@ public class PostgresVote {
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "vote_type")
+    @Column(name = "vote_type", length = 3)
     private EnumVoteType voteType;
 
 }
