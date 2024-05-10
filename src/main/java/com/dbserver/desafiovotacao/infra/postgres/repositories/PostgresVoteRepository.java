@@ -39,10 +39,11 @@ public class PostgresVoteRepository implements IVoteRepository {
         return PostgresVoteMapper.toDomain(entity);
     }
 
-    public int countByAgendaIdAndAssociateId(String agendaId, String associateId) {
-        PostgresAgenda agenda = this.agendaRepository.findEntityById(agendaId).orElseThrow(AgendaNotFoundException::new);
+    public boolean alreadyExistsByAgendaIdAndAssociateId(String agendaId, String associateId) {
+        PostgresAgenda agenda = this.agendaRepository.findEntityById(agendaId)
+                .orElseThrow(AgendaNotFoundException::new);
 
-        return this.repository.countByAgendaAndAssociateId(agenda, UUID.fromString(associateId));
+        return this.repository.findFirstByAgendaAndAssociateId(agenda, UUID.fromString(associateId)) != null;
     }
 
 }

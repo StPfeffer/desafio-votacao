@@ -14,7 +14,7 @@ public class CreateVote {
     }
 
     public VoteDTO execute(VoteDTO dto) {
-        VoteBO entity = repository.persist(VoteMapper.toBO(dto));
+        VoteBO entity = this.repository.persist(VoteMapper.toBO(dto));
 
         return VoteMapper.toDTO(entity);
     }
