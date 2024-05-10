@@ -1,0 +1,23 @@
+name: desafio-votacao
+
+services:
+  postgres:
+    image: postgres:16.2
+    container_name: db
+    restart: always
+    environment:
+      POSTGRES_USER: desafio-votacao
+      POSTGRES_PASSWORD: desafio-votacao
+      POSTGRES_DB: desafio-votacao
+    ports:
+      - 6500:5432
+    volumes:
+      - desafio-votacao:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "sh -c 'pg_isready -U desafio-votacao -d desafio-votacao'"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  desafio-votacao: {}
