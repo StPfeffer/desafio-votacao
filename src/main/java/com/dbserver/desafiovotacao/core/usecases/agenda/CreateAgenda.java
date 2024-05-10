@@ -14,7 +14,7 @@ public class CreateAgenda {
     }
 
     public AgendaDTO execute(AgendaDTO dto) {
-        AgendaBO entity = repository.persist(AgendaMapper.toBO(dto));
+        AgendaBO entity = this.repository.persist(AgendaMapper.toBO(dto));
 
         return AgendaMapper.toDTO(entity);
     }
