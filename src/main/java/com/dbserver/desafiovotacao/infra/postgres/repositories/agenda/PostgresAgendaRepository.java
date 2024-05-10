@@ -4,15 +4,15 @@ import com.dbserver.desafiovotacao.core.entities.AgendaBO;
 import com.dbserver.desafiovotacao.core.repository.IAgendaRepository;
 import com.dbserver.desafiovotacao.infra.postgres.mappers.PostgresAgendaMapper;
 import com.dbserver.desafiovotacao.infra.postgres.models.PostgresAgenda;
-import com.dbserver.desafiovotacao.infra.spring.repositories.SpringAgendaRepository;
+import com.dbserver.desafiovotacao.infra.spring.repositories.agenda.SpringDataAgendaRepository;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PostgresAgendaRepository implements IAgendaRepository {
 
-    private final SpringAgendaRepository repository;
+    private final SpringDataAgendaRepository repository;
 
-    public PostgresAgendaRepository(SpringAgendaRepository repository) {
+    public PostgresAgendaRepository(SpringDataAgendaRepository repository) {
         this.repository = repository;
     }
 
