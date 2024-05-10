@@ -1,6 +1,6 @@
 package com.dbserver.desafiovotacao.infra.postgres.models;
 
-import com.dbserver.desafiovotacao.core.enums.EnumAgendaStatus;
+import com.dbserver.desafiovotacao.core.enums.EnumAgendaSessionStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -28,6 +28,6 @@ public class PostgresAgenda {
     @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private EnumAgendaStatus status;
+    private EnumAgendaSessionStatus status;
 
 }
