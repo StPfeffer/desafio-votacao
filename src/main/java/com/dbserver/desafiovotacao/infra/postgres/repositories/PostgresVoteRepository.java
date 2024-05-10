@@ -7,9 +7,12 @@ import com.dbserver.desafiovotacao.core.mappers.AgendaMapper;
 import com.dbserver.desafiovotacao.core.repository.IVoteRepository;
 import com.dbserver.desafiovotacao.infra.postgres.mappers.PostgresAgendaMapper;
 import com.dbserver.desafiovotacao.infra.postgres.mappers.PostgresVoteMapper;
+import com.dbserver.desafiovotacao.infra.postgres.models.PostgresAgenda;
 import com.dbserver.desafiovotacao.infra.postgres.models.PostgresVote;
 import com.dbserver.desafiovotacao.infra.spring.repositories.SpringDataVoteRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.UUID;
 
 @Service
 public class PostgresVoteRepository implements IVoteRepository {
@@ -34,6 +37,12 @@ public class PostgresVoteRepository implements IVoteRepository {
         entity = this.repository.save(entity);
 
         return PostgresVoteMapper.toDomain(entity);
+    }
+
+    public int countByAgendaIdAndAssociateId(String agendaId, String associateId) {
+        PostgresAgenda agenda = this.agendaRepository.findEntityById(agendaId).orElseThrow(AgendaNotFoundException::new);
+
+        return this.repository.countByAgendaAndAssociateId(agenda, UUID.fromString(associateId));
     }
 
 }
