@@ -2,6 +2,7 @@ package com.dbserver.desafiovotacao.controller;
 
 import com.dbserver.desafiovotacao.core.dtos.AgendaDTO;
 import com.dbserver.desafiovotacao.service.AgendaService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +21,7 @@ public class AgendaController {
     }
 
     @PostMapping("/v1/agendas")
-    public ResponseEntity<AgendaDTO> create(@RequestBody AgendaDTO dto) {
+    public ResponseEntity<AgendaDTO> create(@Valid @RequestBody AgendaDTO dto) {
         AgendaDTO createdAgenda = this.service.create(dto);
 
         return new ResponseEntity<>(createdAgenda, HttpStatus.OK);
