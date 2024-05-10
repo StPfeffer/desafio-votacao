@@ -11,7 +11,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
-@Table(name = "agendas")
+@Table(name = "agenda")
 public class PostgresAgenda {
 
     @Id
