@@ -1,8 +1,7 @@
 package com.dbserver.desafiovotacao.infra;
 
 import com.dbserver.desafiovotacao.core.dtos.ExceptionDTO;
-import com.dbserver.desafiovotacao.core.exceptions.AgendaNotFoundException;
-import com.dbserver.desafiovotacao.core.exceptions.AlreadyVotedException;
+import com.dbserver.desafiovotacao.core.exceptions.AbstractException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -25,8 +24,8 @@ public class ControllerExceptionHandler {
         return ResponseEntity.badRequest().body(exceptionDTO);
     }
 
-    @ExceptionHandler(AgendaNotFoundException.class)
-    public ResponseEntity<ExceptionDTO> threatAgendaNotFoundException(AgendaNotFoundException exception) {
+    @ExceptionHandler(AbstractException.class)
+    public ResponseEntity<ExceptionDTO> threatAgendaNotFoundException(AbstractException exception) {
         ExceptionDTO exceptionDTO = new ExceptionDTO(exception.getMessage(), String.valueOf(exception.getStatusCode()));
 
         return switch (exception.getStatusCode()) {
@@ -34,13 +33,6 @@ public class ControllerExceptionHandler {
             case 404 -> ResponseEntity.notFound().build();
             default -> ResponseEntity.internalServerError().body(exceptionDTO);
         };
-    }
-
-    @ExceptionHandler(AlreadyVotedException.class)
-    public ResponseEntity<ExceptionDTO> threatAlreadyVotedException(AlreadyVotedException exception) {
-        ExceptionDTO exceptionDTO = new ExceptionDTO(exception.getMessage(), String.valueOf(exception.getStatusCode()));
-
-        return ResponseEntity.badRequest().body(exceptionDTO);
     }
 
 }
