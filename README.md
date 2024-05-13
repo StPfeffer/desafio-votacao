@@ -97,3 +97,5 @@ This project follows the principles of Clean Architecture, which emphasizes sepa
 
 - Use the provided API documentation (Swagger UI) to explore and interact with the available endpoints. You can find it [here](http://localhost:8080/swagger-ui/index.html).
 - Create agendas, open voting sessions, cast votes, and view voting results using the provided API endpoints.
+
+You can find the Postman collection in the `resources` folder, or clicking [here](https://github.com/StPfeffer/desafio-votacao/blob/main/src/main/resources/Votacao.postman_collection.json).
