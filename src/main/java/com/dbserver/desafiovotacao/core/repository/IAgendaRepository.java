@@ -11,6 +11,8 @@ public interface IAgendaRepository {
      * Retrieves a list of all agenda entities.
      *
      * @return A list of {@link AgendaBO} objects.
+     * @see IAgendaRepository#persist(AgendaBO)
+     * @see IAgendaRepository#countVotes(String)
      */
     List<AgendaBO> list();
 
@@ -19,6 +21,8 @@ public interface IAgendaRepository {
      *
      * @param bo The {@link AgendaBO} object to be persisted.
      * @return The persisted {@link AgendaBO} object.
+     * @see IAgendaRepository#list()
+     * @see IAgendaRepository#countVotes(String)
      */
     AgendaBO persist(AgendaBO bo);
 
@@ -27,6 +31,8 @@ public interface IAgendaRepository {
      *
      * @param agendaId The ID of the agenda for which votes are counted.
      * @return An {@link AgendaResultBO} object containing the vote count result.
+     * @see IAgendaRepository#list()
+     * @see IAgendaRepository#persist(AgendaBO)
      */
     AgendaResultBO countVotes(String agendaId);
 

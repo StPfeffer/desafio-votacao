@@ -10,6 +10,7 @@ public class AgendaMapper {
      *
      * @param bo The {@link AgendaBO} object to be mapped.
      * @return The mapped {@link AgendaDTO} object.
+     * @see AgendaMapper#toBO(AgendaDTO)
      */
     public static AgendaDTO toDTO(AgendaBO bo) {
         AgendaDTO dto = new AgendaDTO();
@@ -27,6 +28,7 @@ public class AgendaMapper {
      *
      * @param dto The {@link AgendaDTO} object to be mapped.
      * @return The mapped {@link AgendaBO} object.
+     * @see AgendaMapper#toDTO(AgendaBO)
      */
     public static AgendaBO toBO(AgendaDTO dto) {
         AgendaBO bo = new AgendaBO();

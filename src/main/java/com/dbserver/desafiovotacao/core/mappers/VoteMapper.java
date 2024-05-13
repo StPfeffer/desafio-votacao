@@ -10,6 +10,7 @@ public class VoteMapper {
      *
      * @param bo The {@link VoteBO} object to be mapped.
      * @return The mapped {@link VoteDTO} object.
+     * @see VoteMapper#toBO(VoteDTO)
      */
     public static VoteDTO toDTO(VoteBO bo) {
         VoteDTO dto = new VoteDTO();
@@ -27,6 +28,7 @@ public class VoteMapper {
      *
      * @param dto The {@link VoteDTO} object to be mapped.
      * @return The mapped {@link VoteBO} object.
+     * @see VoteMapper#toDTO(VoteBO)
      */
     public static VoteBO toBO(VoteDTO dto) {
         VoteBO bo = new VoteBO();

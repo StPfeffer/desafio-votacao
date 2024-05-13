@@ -12,6 +12,7 @@ public class PostgresVoteMapper {
      *
      * @param entity The {@link PostgresVote} entity to be mapped.
      * @return The corresponding {@link VoteBO} domain object.
+     * @see PostgresVoteMapper#toEntity(VoteBO)
      */
     public static VoteBO toDomain(PostgresVote entity) {
         VoteBO domain = new VoteBO();
@@ -29,6 +30,7 @@ public class PostgresVoteMapper {
      *
      * @param domain The {@link VoteBO} domain object to be mapped.
      * @return The corresponding {@link PostgresVote} entity.
+     * @see PostgresVoteMapper#toDomain(PostgresVote)
      */
     public static PostgresVote toEntity(VoteBO domain) {
         PostgresVote entity = new PostgresVote();

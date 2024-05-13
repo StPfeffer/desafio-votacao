@@ -18,6 +18,7 @@ public interface SpringDataAgendaRepository extends JpaRepository<PostgresAgenda
      *
      * @param agendaId The {@link UUID} of the agenda.
      * @return The count of votes in favor of the specified agenda.
+     * @see SpringDataAgendaRepository#countAgainstVotesByAgendaId(UUID)
      */
     @Query("SELECT COUNT(v) FROM PostgresVote v WHERE v.agenda.id = :agendaId AND v.voteType = 'YES'")
     Long countInFavorVotesByAgendaId(UUID agendaId);
@@ -27,6 +28,7 @@ public interface SpringDataAgendaRepository extends JpaRepository<PostgresAgenda
      *
      * @param agendaId The {@link UUID} of the agenda.
      * @return The count of votes against the specified agenda.
+     * @see SpringDataAgendaRepository#countInFavorVotesByAgendaId(UUID)
      */
     @Query("SELECT COUNT(v) FROM PostgresVote v WHERE v.agenda.id = :agendaId AND v.voteType = 'NO'")
     Long countAgainstVotesByAgendaId(UUID agendaId);
