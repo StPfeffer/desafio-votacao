@@ -21,18 +21,35 @@ public class AgendaController {
 
     private final AgendaSessionService sessionService;
 
+    /**
+     * Constructs a new {@link AgendaController} with the specified service instances.
+     *
+     * @param service        The {@link AgendaService} used to perform agenda-related operations.
+     * @param sessionService The {@link AgendaSessionService} used to perform agenda session-related operations.
+     */
     public AgendaController(AgendaService service, AgendaSessionService sessionService) {
         this.service = service;
         this.sessionService = sessionService;
     }
 
-    @GetMapping( "/v1/agendas")
+    /**
+     * Handles HTTP GET requests for listing all agendas.
+     *
+     * @return {@link ResponseEntity} with a list of {@link AgendaDTO} and HTTP status OK.
+     */
+    @GetMapping("/v1/agendas")
     public ResponseEntity<List<AgendaDTO>> list() {
         List<AgendaDTO> agendas = this.service.list();
 
         return new ResponseEntity<>(agendas, HttpStatus.OK);
     }
 
+    /**
+     * Handles HTTP GET requests for retrieving the result of a specific agenda.
+     *
+     * @param agendaId The ID of the agenda.
+     * @return {@link ResponseEntity} with the {@link AgendaResultDTO} and HTTP status OK.
+     */
     @GetMapping("/v1/agendas/{agendaId}/result")
     public ResponseEntity<AgendaResultDTO> getResult(@PathVariable String agendaId) {
         AgendaResultDTO agendaResult = this.service.countVotes(agendaId);
@@ -40,6 +57,12 @@ public class AgendaController {
         return new ResponseEntity<>(agendaResult, HttpStatus.OK);
     }
 
+    /**
+     * Handles HTTP POST requests for creating a new agenda.
+     *
+     * @param dto The {@link AgendaDTO} representing the agenda to be created.
+     * @return {@link ResponseEntity} with the created {@link AgendaDTO} and HTTP status OK.
+     */
     @PostMapping("/v1/agendas")
     public ResponseEntity<AgendaDTO> create(@Valid @RequestBody AgendaDTO dto) {
         AgendaDTO createdAgenda = this.service.create(dto);
@@ -47,6 +70,12 @@ public class AgendaController {
         return new ResponseEntity<>(createdAgenda, HttpStatus.OK);
     }
 
+    /**
+     * Handles HTTP POST requests for opening a session for an agenda.
+     *
+     * @param dto The {@link AgendaOpenSessionRequestDTO} representing the session to be opened.
+     * @return {@link ResponseEntity} with the {@link AgendaOpenSessionResponseDTO} and HTTP status OK.
+     */
     @PostMapping("/v1/agendas/session/open")
     public ResponseEntity<AgendaOpenSessionResponseDTO> open(@RequestBody AgendaOpenSessionRequestDTO dto) {
         AgendaOpenSessionResponseDTO agendaResult = this.sessionService.create(dto);
