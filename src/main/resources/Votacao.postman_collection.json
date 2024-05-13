@@ -1,0 +1,188 @@
+{
+	"info": {
+		"_postman_id": "a9275957-6e62-4a5f-85c4-b7e20a065df7",
+		"name": "Votacao",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25630504"
+	},
+	"item": [
+		{
+			"name": "Agenda",
+			"item": [
+				{
+					"name": "Create Agenda",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"teste\",\r\n    \"description\": \"Teste da agenda\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}/api/v2/agendas",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"api",
+								"v2",
+								"agendas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Open Agenda Session",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}/api/v1/agendas/:agendaId/open",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"agendas",
+								":agendaId",
+								"open"
+							],
+							"variable": [
+								{
+									"key": "agendaId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Agenda Results",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base}}/api/v1/agendas/:agendaId/result",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"agendas",
+								":agendaId",
+								"result"
+							],
+							"variable": [
+								{
+									"key": "agendaId",
+									"value": "9a7568ba-ba51-4103-9aff-a52e31d15d9f",
+									"description": "The agenda ID"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Agendas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base}}/api/v1/agendas",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"agendas"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Vote",
+			"item": [
+				{
+					"name": "Create Vote",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"agendaId\": \"0666d7b8-69da-4898-a290-864466e2ccfa\",\r\n    \"associateId\": \"d1b8d0a7-1b40-44f5-aee9-2a31231b786\",\r\n    \"voteType\": \"NO\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}/api/v1/votes",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"votes"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base",
+			"value": "localhost:8080",
+			"type": "string"
+		}
+	]
+}
