@@ -27,11 +27,24 @@ public class AgendaSessionService {
 
     private final PostgresAgendaRepository agendaRepository;
 
+    /**
+     * Constructs a new {@link AgendaSessionService} with the specified repositories.
+     *
+     * @param repository       The {@link PostgresAgendaSessionRepository} used to interact with agenda session entities.
+     * @param agendaRepository The {@link PostgresAgendaRepository} used to interact with agenda entities.
+     */
     public AgendaSessionService(PostgresAgendaSessionRepository repository, PostgresAgendaRepository agendaRepository) {
         this.repository = repository;
         this.agendaRepository = agendaRepository;
     }
 
+    /**
+     * Creates a new session for the specified agenda.
+     *
+     * @param dto The {@link AgendaOpenSessionRequestDTO} representing the session to be created.
+     * @return The {@link AgendaOpenSessionResponseDTO} containing information about the created session.
+     * @throws AgendaNotFoundException if the specified agenda is not found.
+     */
     public AgendaOpenSessionResponseDTO create(AgendaOpenSessionRequestDTO dto) {
         PostgresAgenda agenda = this.agendaRepository.findEntityById(dto.getAgendaId())
                 .orElseThrow(AgendaNotFoundException::new);
@@ -46,6 +59,9 @@ public class AgendaSessionService {
         return createAgendaSession.execute(dto, agendaBO);
     }
 
+    /**
+     * Closes expired agenda sessions.
+     */
     public void closeSessions() {
         List<PostgresAgendaSession> sessions = repository.listAllOpen();
 
@@ -63,6 +79,12 @@ public class AgendaSessionService {
         });
     }
 
+    /**
+     * Checks if a session has expired.
+     *
+     * @param session The session to check.
+     * @return {@code true} if the session has expired, otherwise {@code false}.
+     */
     private boolean checkIfSessionExpired(PostgresAgendaSession session) {
         return LocalDateTime.now().isAfter(session.getOpenedAt().plusMinutes(session.getMinutes()));
     }

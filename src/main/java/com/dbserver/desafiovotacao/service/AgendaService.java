@@ -18,10 +18,21 @@ public class AgendaService {
 
     private final PostgresAgendaRepository repository;
 
+    /**
+     * Constructs a new {@link AgendaService} with the specified {@link PostgresAgendaRepository} dependency.
+     *
+     * @param repository The {@link PostgresAgendaRepository} used to interact with agenda entities.
+     */
     public AgendaService(PostgresAgendaRepository repository) {
         this.repository = repository;
     }
 
+    /**
+     * Creates a new agenda.
+     *
+     * @param dto The {@link AgendaDTO} representing the agenda to be created.
+     * @return The created {@link AgendaDTO}.
+     */
     public AgendaDTO create(AgendaDTO dto) {
         if (dto.getStatus() == null) {
             dto.setStatus(EnumAgendaSessionStatus.CREATED);
@@ -32,13 +43,25 @@ public class AgendaService {
         return createAgenda.execute(dto);
     }
 
+    /**
+     * Retrieves a list of all agendas.
+     *
+     * @return A list of {@link AgendaDTO} representing all agendas.
+     */
     public List<AgendaDTO> list() {
         ListAgendas listAgendas = new ListAgendas(repository);
 
         return listAgendas.execute();
     }
 
-    public AgendaResultDTO countVotes(String agendaId) {
+    /**
+     * Counts the votes for a specific agenda.
+     *
+     * @param agendaId The ID of the agenda.
+     * @return The {@link AgendaResultDTO} containing the vote counts.
+     * @throws AgendaSessionNotFinishedException if the session for the agenda is not finished.
+     */
+    public AgendaResultDTO countVotes(String agendaId) throws AgendaSessionNotFinishedException {
         if (!this.isSessionFinished(agendaId)) {
             throw new AgendaSessionNotFinishedException();
         }
@@ -48,6 +71,12 @@ public class AgendaService {
         return countAgendaVotes.execute(agendaId);
     }
 
+    /**
+     * Checks if the session for the specified agenda is finished.
+     *
+     * @param agendaId The ID of the agenda.
+     * @return True if the session is finished, false otherwise.
+     */
     private boolean isSessionFinished(String agendaId) {
         AgendaDTO agenda = this.repository.findById(agendaId)
                 .orElseThrow(AgendaNotFoundException::new);
