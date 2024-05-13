@@ -6,6 +6,11 @@ import com.dbserver.desafiovotacao.core.dtos.AgendaOpenSessionResponseDTO;
 import com.dbserver.desafiovotacao.core.dtos.AgendaResultDTO;
 import com.dbserver.desafiovotacao.service.AgendaService;
 import com.dbserver.desafiovotacao.service.AgendaSessionService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +42,11 @@ public class AgendaController {
      *
      * @return {@link ResponseEntity} with a list of {@link AgendaDTO} and HTTP status OK.
      */
+    @Operation(summary = "List all the agendas")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully listed the agendas",
+                    content = {@Content(mediaType = "application/json")})
+    })
     @GetMapping("/v1/agendas")
     public ResponseEntity<List<AgendaDTO>> list() {
         List<AgendaDTO> agendas = this.service.list();
@@ -50,6 +60,12 @@ public class AgendaController {
      * @param agendaId The ID of the agenda.
      * @return {@link ResponseEntity} with the {@link AgendaResultDTO} and HTTP status OK.
      */
+    @Operation(summary = "Returns the agenda voting result")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully counted the results",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = AgendaResultDTO.class))})
+    })
     @GetMapping("/v1/agendas/{agendaId}/result")
     public ResponseEntity<AgendaResultDTO> getResult(@PathVariable String agendaId) {
         AgendaResultDTO agendaResult = this.service.countVotes(agendaId);
@@ -63,6 +79,12 @@ public class AgendaController {
      * @param dto The {@link AgendaDTO} representing the agenda to be created.
      * @return {@link ResponseEntity} with the created {@link AgendaDTO} and HTTP status OK.
      */
+    @Operation(summary = "Creates an agenda")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully created the agenda",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = AgendaDTO.class))})
+    })
     @PostMapping("/v1/agendas")
     public ResponseEntity<AgendaDTO> create(@Valid @RequestBody AgendaDTO dto) {
         AgendaDTO createdAgenda = this.service.create(dto);
@@ -76,6 +98,12 @@ public class AgendaController {
      * @param dto The {@link AgendaOpenSessionRequestDTO} representing the session to be opened.
      * @return {@link ResponseEntity} with the {@link AgendaOpenSessionResponseDTO} and HTTP status OK.
      */
+    @Operation(summary = "Open an agenda voting session")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully opened the agenda session",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = AgendaOpenSessionResponseDTO.class))}),
+    })
     @PostMapping("/v1/agendas/{agendaId}/open")
     public ResponseEntity<AgendaOpenSessionResponseDTO> open(@PathVariable String agendaId, @Valid @RequestBody(required = false) AgendaOpenSessionRequestDTO dto) {
         AgendaOpenSessionResponseDTO agendaResult = this.sessionService.create(agendaId, dto);
