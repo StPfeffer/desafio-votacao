@@ -41,16 +41,25 @@ public class AgendaSessionService {
     /**
      * Creates a new session for the specified agenda.
      *
-     * @param dto The {@link AgendaOpenSessionRequestDTO} representing the session to be created.
+     * @param agendaId The ID of the agenda.
+     * @param dto      The {@link AgendaOpenSessionRequestDTO} representing the session to be created.
      * @return The {@link AgendaOpenSessionResponseDTO} containing information about the created session.
      * @throws AgendaNotFoundException if the specified agenda is not found.
      */
-    public AgendaOpenSessionResponseDTO create(AgendaOpenSessionRequestDTO dto) {
-        PostgresAgenda agenda = this.agendaRepository.findEntityById(dto.getAgendaId())
+    public AgendaOpenSessionResponseDTO create(String agendaId, AgendaOpenSessionRequestDTO dto) {
+        PostgresAgenda agenda = this.agendaRepository.findEntityById(agendaId)
                 .orElseThrow(AgendaNotFoundException::new);
 
         AgendaBO agendaBO = PostgresAgendaMapper.toDomain(agenda);
         agendaBO.tryToOpenAgendaSession();
+
+        if (dto == null) {
+            dto = new AgendaOpenSessionRequestDTO();
+        }
+
+        if (dto.getMinutes() == null || dto.getMinutes() < 1) {
+            dto.setMinutes(1);
+        }
 
         CreateAgendaSession createAgendaSession = new CreateAgendaSession(repository);
 

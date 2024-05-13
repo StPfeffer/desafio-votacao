@@ -76,9 +76,9 @@ public class AgendaController {
      * @param dto The {@link AgendaOpenSessionRequestDTO} representing the session to be opened.
      * @return {@link ResponseEntity} with the {@link AgendaOpenSessionResponseDTO} and HTTP status OK.
      */
-    @PostMapping("/v1/agendas/session/open")
-    public ResponseEntity<AgendaOpenSessionResponseDTO> open(@RequestBody AgendaOpenSessionRequestDTO dto) {
-        AgendaOpenSessionResponseDTO agendaResult = this.sessionService.create(dto);
+    @PostMapping("/v1/agendas/{agendaId}/open")
+    public ResponseEntity<AgendaOpenSessionResponseDTO> open(@PathVariable String agendaId, @Valid @RequestBody(required = false) AgendaOpenSessionRequestDTO dto) {
+        AgendaOpenSessionResponseDTO agendaResult = this.sessionService.create(agendaId, dto);
 
         return new ResponseEntity<>(agendaResult, HttpStatus.OK);
     }
