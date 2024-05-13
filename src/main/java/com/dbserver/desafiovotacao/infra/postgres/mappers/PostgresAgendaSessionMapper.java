@@ -19,7 +19,7 @@ public class PostgresAgendaSessionMapper {
         PostgresAgendaSession entity = new PostgresAgendaSession();
 
         entity.setId(UUID.randomUUID());
-        entity.setMinutes(domain.getMinutes());
+        entity.setMinutes(domain.getMinutes() == null ? 1 : domain.getMinutes());
 
         return entity;
     }
