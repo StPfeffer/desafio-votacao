@@ -14,6 +14,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * PostgresAgendaSessionRepository is a service class responsible for interacting with the PostgreSQL database
+ * to perform operations related to agenda sessions.
+ */
 @Service
 public class PostgresAgendaSessionRepository implements IAgendaSessionRepository {
 
@@ -21,11 +25,24 @@ public class PostgresAgendaSessionRepository implements IAgendaSessionRepository
 
     private final SpringDataAgendaRepository agendaRepository;
 
+    /**
+     * Constructs a new {@link PostgresAgendaSessionRepository} with the specified dependencies.
+     *
+     * @param repository       The {@link SpringDataAgendaSessionRepository} used to interact with agenda session entities.
+     * @param agendaRepository The {@link SpringDataAgendaRepository} used to interact with agenda entities.
+     */
     public PostgresAgendaSessionRepository(SpringDataAgendaSessionRepository repository, SpringDataAgendaRepository agendaRepository) {
         this.repository = repository;
         this.agendaRepository = agendaRepository;
     }
 
+    /**
+     * Persists an agenda session into the database.
+     *
+     * @param bo       The {@link AgendaOpenSessionRequestBO} representing the agenda session to be persisted.
+     * @param agendaBO The {@link AgendaBO} representing the associated agenda.
+     * @return The persisted {@link AgendaOpenSessionResponseBO} entity.
+     */
     @Override
     public AgendaOpenSessionResponseBO persist(AgendaOpenSessionRequestBO bo, AgendaBO agendaBO) {
         PostgresAgenda agenda = PostgresAgendaMapper.toEntity(agendaBO);
@@ -39,10 +56,20 @@ public class PostgresAgendaSessionRepository implements IAgendaSessionRepository
         return PostgresAgendaSessionMapper.toDomainResponse(entity);
     }
 
+    /**
+     * Updates an existing agenda session in the database.
+     *
+     * @param entity The {@link PostgresAgendaSession} entity to be updated.
+     */
     public void update(PostgresAgendaSession entity) {
         this.repository.save(entity);
     }
 
+    /**
+     * Retrieves a list of all open agenda sessions from the database.
+     *
+     * @return A list of {@link PostgresAgendaSession} entities representing open sessions.
+     */
     public List<PostgresAgendaSession> listAllOpen() {
         return repository.listAllOpenSessions();
     }
