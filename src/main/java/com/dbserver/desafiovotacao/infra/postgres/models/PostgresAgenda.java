@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -29,5 +30,11 @@ public class PostgresAgenda {
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private EnumAgendaSessionStatus status;
+
+    @OneToMany(mappedBy = "agenda", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<PostgresVote> votes;
+
+    @OneToOne(mappedBy = "agenda")
+    private PostgresAgendaSession agendaSession;
 
 }
