@@ -12,6 +12,7 @@ public class PostgresAgendaMapper {
      *
      * @param entity The {@link PostgresAgenda} entity to be mapped.
      * @return The corresponding {@link AgendaBO} domain object.
+     * @see PostgresAgendaMapper#toEntity(AgendaBO)
      */
     public static AgendaBO toDomain(PostgresAgenda entity) {
         AgendaBO domain = new AgendaBO();
@@ -29,6 +30,7 @@ public class PostgresAgendaMapper {
      *
      * @param domain The {@link AgendaBO} domain object to be mapped.
      * @return The corresponding {@link PostgresAgenda} entity.
+     * @see PostgresAgendaMapper#toDomain(PostgresAgenda)
      */
     public static PostgresAgenda toEntity(AgendaBO domain) {
         PostgresAgenda entity = new PostgresAgenda();

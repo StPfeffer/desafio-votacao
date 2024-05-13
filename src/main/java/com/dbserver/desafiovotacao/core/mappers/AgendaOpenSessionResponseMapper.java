@@ -10,6 +10,7 @@ public class AgendaOpenSessionResponseMapper {
      *
      * @param bo The {@link AgendaOpenSessionResponseBO} object to be mapped.
      * @return The mapped {@link AgendaOpenSessionResponseDTO} object.
+     * @see AgendaOpenSessionResponseMapper#toBO(AgendaOpenSessionResponseDTO)
      */
     public static AgendaOpenSessionResponseDTO toDTO(AgendaOpenSessionResponseBO bo) {
         AgendaOpenSessionResponseDTO dto = new AgendaOpenSessionResponseDTO();
@@ -26,6 +27,7 @@ public class AgendaOpenSessionResponseMapper {
      *
      * @param dto The {@link AgendaOpenSessionResponseDTO} object to be mapped.
      * @return The mapped {@link AgendaOpenSessionResponseBO} object.
+     * @see AgendaOpenSessionResponseMapper#toDTO(AgendaOpenSessionResponseBO)
      */
     public static AgendaOpenSessionResponseBO toBO(AgendaOpenSessionResponseDTO dto) {
         AgendaOpenSessionResponseBO bo = new AgendaOpenSessionResponseBO();

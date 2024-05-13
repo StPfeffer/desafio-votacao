@@ -10,6 +10,7 @@ public class AgendaOpenSessionRequestMapper {
      *
      * @param bo The {@link AgendaOpenSessionRequestBO} object to be mapped.
      * @return The mapped {@link AgendaOpenSessionRequestDTO} object.
+     * @see AgendaOpenSessionRequestMapper#toBO(AgendaOpenSessionRequestDTO)
      */
     public static AgendaOpenSessionRequestDTO toDTO(AgendaOpenSessionRequestBO bo) {
         AgendaOpenSessionRequestDTO dto = new AgendaOpenSessionRequestDTO();
@@ -25,6 +26,7 @@ public class AgendaOpenSessionRequestMapper {
      *
      * @param dto The {@link AgendaOpenSessionRequestDTO} object to be mapped.
      * @return The mapped {@link AgendaOpenSessionRequestBO} object.
+     * @see AgendaOpenSessionRequestMapper#toDTO(AgendaOpenSessionRequestBO)
      */
     public static AgendaOpenSessionRequestBO toBO(AgendaOpenSessionRequestDTO dto) {
         AgendaOpenSessionRequestBO bo = new AgendaOpenSessionRequestBO();

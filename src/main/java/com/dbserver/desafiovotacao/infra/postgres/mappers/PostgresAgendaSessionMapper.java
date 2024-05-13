@@ -13,6 +13,7 @@ public class PostgresAgendaSessionMapper {
      *
      * @param domain The {@link AgendaOpenSessionRequestBO} domain object to be mapped.
      * @return The corresponding {@link PostgresAgendaSession} entity.
+     * @see PostgresAgendaSessionMapper#toDomainResponse(PostgresAgendaSession)
      */
     public static PostgresAgendaSession toEntity(AgendaOpenSessionRequestBO domain) {
         PostgresAgendaSession entity = new PostgresAgendaSession();
@@ -28,6 +29,7 @@ public class PostgresAgendaSessionMapper {
      *
      * @param entity The {@link PostgresAgendaSession} entity to be mapped.
      * @return The corresponding {@link AgendaOpenSessionResponseBO} domain object.
+     * @see PostgresAgendaSessionMapper#toEntity(AgendaOpenSessionRequestBO)
      */
     public static AgendaOpenSessionResponseBO toDomainResponse(PostgresAgendaSession entity) {
         AgendaOpenSessionResponseBO domain = new AgendaOpenSessionResponseBO();

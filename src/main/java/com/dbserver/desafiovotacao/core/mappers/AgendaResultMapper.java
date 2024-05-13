@@ -10,6 +10,7 @@ public class AgendaResultMapper {
      *
      * @param bo The {@link AgendaResultBO} object to be mapped.
      * @return The mapped {@link AgendaResultDTO} object.
+     * @see AgendaResultMapper#toBO(AgendaResultDTO)
      */
     public static AgendaResultDTO toDTO(AgendaResultBO bo) {
         AgendaResultDTO dto = new AgendaResultDTO();
@@ -29,6 +30,7 @@ public class AgendaResultMapper {
      *
      * @param dto The {@link AgendaResultDTO} object to be mapped.
      * @return The mapped {@link AgendaResultBO} object.
+     * @see AgendaResultMapper#toDTO(AgendaResultBO)
      */
     @SuppressWarnings("unused")
     public static AgendaResultBO toBO(AgendaResultDTO dto) {
