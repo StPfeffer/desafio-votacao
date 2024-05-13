@@ -11,6 +11,12 @@ import java.util.UUID;
 @Repository
 public interface SpringDataAgendaSessionRepository extends JpaRepository<PostgresAgendaSession, UUID> {
 
+    /**
+     * Retrieves a list of all open agenda sessions.
+     *
+     * @return A list of {@link PostgresAgendaSession} entities where the 'closedAt' field is
+     * {@code null}, indicating open sessions.
+     */
     @Query("SELECT e FROM PostgresAgendaSession e WHERE e.closedAt IS NULL")
     List<PostgresAgendaSession> listAllOpenSessions();
 
