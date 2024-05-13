@@ -44,6 +44,7 @@ public class VoteController {
     @PostMapping("/v1/votes")
     public ResponseEntity<VoteDTO> create(@Valid @RequestBody VoteDTO dto) {
         VoteDTO createdVote = service.create(dto);
+
         return ResponseEntity.ok(createdVote);
     }
 
