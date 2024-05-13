@@ -1,6 +1,8 @@
 package com.dbserver.desafiovotacao.core.entities;
 
 import com.dbserver.desafiovotacao.core.enums.EnumAgendaSessionStatus;
+import com.dbserver.desafiovotacao.core.exceptions.AgendaSessionAlreadyFinishedException;
+import com.dbserver.desafiovotacao.core.exceptions.AgendaSessionAlreadyOpenedException;
 
 public class AgendaBO {
 
@@ -11,6 +13,18 @@ public class AgendaBO {
     private String description;
 
     private EnumAgendaSessionStatus status;
+
+    public void tryToOpenAgendaSession() {
+        if (this.getStatus() == EnumAgendaSessionStatus.CLOSED) {
+            throw new AgendaSessionAlreadyFinishedException();
+        }
+
+        if (this.getStatus() == EnumAgendaSessionStatus.OPEN) {
+            throw new AgendaSessionAlreadyOpenedException();
+        }
+
+        this.setStatus(EnumAgendaSessionStatus.OPEN);
+    }
 
     public String getId() {
         return id;
