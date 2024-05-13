@@ -5,11 +5,11 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CheckSession {
+public class CheckAgendaSession {
 
     private final AgendaSessionService sessionService;
 
-    public CheckSession(AgendaSessionService sessionService) {
+    public CheckAgendaSession(AgendaSessionService sessionService) {
         this.sessionService = sessionService;
     }
 
