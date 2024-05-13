@@ -5,6 +5,7 @@ import com.dbserver.desafiovotacao.core.dtos.AgendaResultDTO;
 import com.dbserver.desafiovotacao.core.enums.EnumAgendaSessionStatus;
 import com.dbserver.desafiovotacao.core.exceptions.AgendaNotFoundException;
 import com.dbserver.desafiovotacao.core.exceptions.AgendaSessionNotFinishedException;
+import com.dbserver.desafiovotacao.core.exceptions.GenericAgendaException;
 import com.dbserver.desafiovotacao.core.usecases.agenda.CountAgendaVotes;
 import com.dbserver.desafiovotacao.core.usecases.agenda.CreateAgenda;
 import com.dbserver.desafiovotacao.core.usecases.agenda.ListAgendas;
@@ -34,6 +35,8 @@ public class AgendaService {
      * @return The created {@link AgendaDTO}.
      */
     public AgendaDTO create(AgendaDTO dto) {
+        this.canCreate(dto);
+
         if (dto.getStatus() == null) {
             dto.setStatus(EnumAgendaSessionStatus.CREATED);
         }
@@ -41,6 +44,12 @@ public class AgendaService {
         CreateAgenda createAgenda = new CreateAgenda(repository);
 
         return createAgenda.execute(dto);
+    }
+
+    private void canCreate(AgendaDTO dto) {
+        if (dto.getTitle() == null || dto.getTitle().isEmpty()) {
+            throw new GenericAgendaException("Missing required property 'title'", 400);
+        }
     }
 
     /**
