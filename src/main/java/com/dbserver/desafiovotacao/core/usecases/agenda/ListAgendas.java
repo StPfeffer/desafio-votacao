@@ -11,10 +11,20 @@ public class ListAgendas {
 
     private final IAgendaRepository repository;
 
+    /**
+     * Constructs a {@link ListAgendas} object with the specified agenda repository.
+     *
+     * @param repository The repository for managing agenda entities.
+     */
     public ListAgendas(IAgendaRepository repository) {
         this.repository = repository;
     }
 
+    /**
+     * Executes the use case to retrieve a list of agendas.
+     *
+     * @return A list of {@link AgendaDTO} representing the retrieved agendas.
+     */
     public List<AgendaDTO> execute() {
         List<AgendaBO> entities = this.repository.list();
 
