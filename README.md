@@ -1,117 +1,99 @@
-# Votação
+# Voting System
 
-## Objetivo
+## Table of Contents
 
-No cooperativismo, cada associado possui um voto e as decisões são tomadas em assembleias, por votação. Imagine que você deve criar uma solução para dispositivos móveis para gerenciar e participar dessas sessões de votação.
-Essa solução deve ser executada na nuvem e promover as seguintes funcionalidades através de uma API REST:
+- [Introduction](#Introduction)
+- [Prerequisites](#Prerequisites)
+- [Technologies Used](#Technologies)
+- [Architecture](#Architecture)
+- [Setup Instructions](#Setup)
+- [Usage](#Usage)
 
-- Cadastrar uma nova pauta
-- Abrir uma sessão de votação em uma pauta (a sessão de votação deve ficar aberta por
-  um tempo determinado na chamada de abertura ou 1 minuto por default)
-- Receber votos dos associados em pautas (os votos são apenas 'Sim'/'Não'. Cada associado
-  é identificado por um id único e pode votar apenas uma vez por pauta)
-- Contabilizar os votos e dar o resultado da votação na pauta
+## Introduction
 
-Para fins de exercício, a segurança das interfaces pode ser abstraída e qualquer chamada para as interfaces pode ser considerada como autorizada. A solução deve ser construída em java, usando Spring-boot, mas os frameworks e bibliotecas são de livre escolha (desde que não infrinja direitos de uso).
+The Voting System is a web application designed to facilitate voting processes for various agendas.
 
-É importante que as pautas e os votos sejam persistidos e que não sejam perdidos com o restart da aplicação.
+It provides functionalities for creating agendas, opening voting sessions, casting votes, and calculating voting results. This README provides information on prerequisites, technologies used, project architecture, setup instructions, usage, and contributing guidelines.
 
-O foco dessa avaliação é a comunicação entre o backend e o aplicativo mobile. Essa comunicação é feita através de mensagens no formato JSON, onde essas mensagens serão interpretadas pelo cliente para montar as telas onde o usuário vai interagir com o sistema. A aplicação cliente não faz parte da avaliação, apenas os componentes do servidor. O formato padrão dessas mensagens será detalhado no anexo 1.
+## Prerequisites
 
-## Como proceder
+Before running the project, ensure you have the following installed:
 
-Por favor, realize o FORK desse repositório e implemente sua solução no FORK em seu repositório GItHub, ao final, notifique da conclusão para que possamos analisar o código implementado.
+- Java Development Kit (JDK) 17
+- Apache Maven
+- Docker 26.0.0 (for running the PostgreSQL database container)
 
-Lembre de deixar todas as orientações necessárias para executar o seu código.
+## Technologies
 
-### Tarefas bônus
+The project is built using the following technologies:
 
-- Tarefa Bônus 1 - Integração com sistemas externos
-  - Criar uma Facade/Client Fake que retorna aleátoriamente se um CPF recebido é válido ou não.
-  - Caso o CPF seja inválido, a API retornará o HTTP Status 404 (Not found). Você pode usar geradores de CPF para gerar CPFs válidos
-  - Caso o CPF seja válido, a API retornará se o usuário pode (ABLE_TO_VOTE) ou não pode (UNABLE_TO_VOTE) executar a operação. Essa operação retorna resultados aleatórios, portanto um mesmo CPF pode funcionar em um teste e não funcionar no outro.
+- Java
+- Spring Boot
+- Spring Data JPA
+- PostgreSQL
+- Swagger (OpenAPI)
+- Maven
 
-```
-// CPF Ok para votar
-{
-    "status": "ABLE_TO_VOTE
-}
-// CPF Nao Ok para votar - retornar 404 no client tb
-{
-    "status": "UNABLE_TO_VOTE
-}
-```
+## Architecture
 
-Exemplos de retorno do serviço
+This project follows the principles of Clean Architecture, which emphasizes separation of concerns and independence of frameworks. It consists of several layers:
 
-### Tarefa Bônus 2 - Performance
+- **Controller**: Handles incoming HTTP requests, delegates to the appropriate use case, and returns HTTP responses.
+- **Core**:
+  - **DTOs**: Contains Data Transfer Objects used to transfer data between layers.
+  - **Entities**: Contains the core business entities of the application.
+  - **Enums**: Contains enums used in the application.
+  - **Exceptions**: Contains custom exceptions thrown by the application.
+  - **Mappers**: Provides mapping between DTOs and domain entities.
+  - **Repository**: Provides an interface for data access, allowing the application to interact with the database.
+  - **Usecases**: Contains the application's business logic and use cases.
+- **Infra**:
+  - **PostgreSQL**:
+    - **Mappers**: Provides mapping between PostgreSQL entities and domain entities.
+    - **Models**: Contains PostgreSQL entity models.
+    - **Repositories**: Provides data access methods specific to PostgreSQL.
+  - **Spring**:
+    - **Repositories**: Contains Spring Data repositories.
+    - **Routines**: Contains routines specific to Spring framework.
+- **Service**: Contains the business logic and orchestrates the interaction between repositories and controllers.
 
-- Imagine que sua aplicação possa ser usada em cenários que existam centenas de
-  milhares de votos. Ela deve se comportar de maneira performática nesses
-  cenários
-- Testes de performance são uma boa maneira de garantir e observar como sua
-  aplicação se comporta
+## Setup
 
-### Tarefa Bônus 3 - Versionamento da API
+1. Clone the repository:
 
-○ Como você versionaria a API da sua aplicação? Que estratégia usar?
+    ```shell
+    git clone https://github.com/StPfeffer/desafio-votacao.git
+    ```
 
-## O que será analisado
+2. Configure the database:
 
-- Simplicidade no design da solução (evitar over engineering)
-- Organização do código
-- Arquitetura do projeto
-- Boas práticas de programação (manutenibilidade, legibilidade etc)
-- Possíveis bugs
-- Tratamento de erros e exceções
-- Explicação breve do porquê das escolhas tomadas durante o desenvolvimento da solução
-- Uso de testes automatizados e ferramentas de qualidade
-- Limpeza do código
-- Documentação do código e da API
-- Logs da aplicação
-- Mensagens e organização dos commits
+    The PostgreSQL database is configured to run in a container. To start the container you can run the following command:
 
-## Dicas
+    ```shell
+    cd desafio-votacao
+    docker compose up
+    ```
 
-- Teste bem sua solução, evite bugs
-- Deixe o domínio das URLs de callback passiveis de alteração via configuração, para facilitar
-  o teste tanto no emulador, quanto em dispositivos fisicos.
-  Observações importantes
-- Não inicie o teste sem sanar todas as dúvidas
-- Iremos executar a aplicação para testá-la, cuide com qualquer dependência externa e
-  deixe claro caso haja instruções especiais para execução do mesmo
-  Classificação da informação: Uso Interno
+    By default, the container will listen to the port 6532.
 
-## Anexo 1
 
-### Introdução
+3. Build the project:
 
-A seguir serão detalhados os tipos de tela que o cliente mobile suporta, assim como os tipos de campos disponíveis para a interação do usuário.
+    ```shell
+    mvn clean install
+    ```
 
-### Tipo de tela – FORMULARIO
+4. Run the application:
 
-A tela do tipo FORMULARIO exibe uma coleção de campos (itens) e possui um ou dois botões de ação na parte inferior.
+    ```shell
+    mvn spring-boot:run
+    ```
 
-O aplicativo envia uma requisição POST para a url informada e com o body definido pelo objeto dentro de cada botão quando o mesmo é acionado. Nos casos onde temos campos de entrada
-de dados na tela, os valores informados pelo usuário são adicionados ao corpo da requisição. Abaixo o exemplo da requisição que o aplicativo vai fazer quando o botão “Ação 1” for acionado:
+5. Access the application:
 
-```
-POST http://seudominio.com/ACAO1
-{
-    “campo1”: “valor1”,
-    “campo2”: 123,
-    “idCampoTexto”: “Texto”,
-    “idCampoNumerico: 999
-    “idCampoData”: “01/01/2000”
-}
-```
+    The application will be accessible at http://localhost:8080.
 
-Obs: o formato da url acima é meramente ilustrativo e não define qualquer padrão de formato.
+## Usage
 
-### Tipo de tela – SELECAO
-
-A tela do tipo SELECAO exibe uma lista de opções para que o usuário.
-
-O aplicativo envia uma requisição POST para a url informada e com o body definido pelo objeto dentro de cada item da lista de seleção, quando o mesmo é acionado, semelhando ao funcionamento dos botões da tela FORMULARIO.
-
-# desafio-votacao
+- Use the provided API documentation (Swagger UI) to explore and interact with the available endpoints. You can find it [here](http://localhost:8080/swagger-ui/index.html).
+- Create agendas, open voting sessions, cast votes, and view voting results using the provided API endpoints.
