@@ -4,10 +4,14 @@ import com.dbserver.desafiovotacao.core.dtos.AgendaResultDTO;
 import com.dbserver.desafiovotacao.core.entities.AgendaResultBO;
 import com.dbserver.desafiovotacao.core.mappers.AgendaResultMapper;
 import com.dbserver.desafiovotacao.core.repository.IAgendaRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class CountAgendaVotes {
 
     private final IAgendaRepository repository;
+
+    private static final Logger log = LoggerFactory.getLogger(CountAgendaVotes.class);
 
     /**
      * Constructs a {@link CountAgendaVotes} object with the specified agenda repository.
@@ -26,6 +30,8 @@ public class CountAgendaVotes {
      */
     public AgendaResultDTO execute(String agendaId) {
         AgendaResultBO entity = this.repository.countVotes(agendaId);
+
+        log.info("Counting the votes for agenda: {}", agendaId);
 
         return AgendaResultMapper.toDTO(entity);
     }
