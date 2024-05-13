@@ -8,6 +8,12 @@ import java.util.UUID;
 
 public class PostgresAgendaSessionMapper {
 
+    /**
+     * Maps an {@link AgendaOpenSessionRequestBO} domain object to a {@link PostgresAgendaSession} entity.
+     *
+     * @param domain The {@link AgendaOpenSessionRequestBO} domain object to be mapped.
+     * @return The corresponding {@link PostgresAgendaSession} entity.
+     */
     public static PostgresAgendaSession toEntity(AgendaOpenSessionRequestBO domain) {
         PostgresAgendaSession entity = new PostgresAgendaSession();
 
@@ -17,6 +23,12 @@ public class PostgresAgendaSessionMapper {
         return entity;
     }
 
+    /**
+     * Maps a {@link PostgresAgendaSession} entity to an {@link AgendaOpenSessionResponseBO} domain object.
+     *
+     * @param entity The {@link PostgresAgendaSession} entity to be mapped.
+     * @return The corresponding {@link AgendaOpenSessionResponseBO} domain object.
+     */
     public static AgendaOpenSessionResponseBO toDomainResponse(PostgresAgendaSession entity) {
         AgendaOpenSessionResponseBO domain = new AgendaOpenSessionResponseBO();
 

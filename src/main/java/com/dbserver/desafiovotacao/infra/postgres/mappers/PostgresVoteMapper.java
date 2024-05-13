@@ -7,6 +7,12 @@ import java.util.UUID;
 
 public class PostgresVoteMapper {
 
+    /**
+     * Maps a {@link PostgresVote} entity to a {@link VoteBO} domain object.
+     *
+     * @param entity The {@link PostgresVote} entity to be mapped.
+     * @return The corresponding {@link VoteBO} domain object.
+     */
     public static VoteBO toDomain(PostgresVote entity) {
         VoteBO domain = new VoteBO();
 
@@ -18,6 +24,12 @@ public class PostgresVoteMapper {
         return domain;
     }
 
+    /**
+     * Maps a {@link VoteBO} domain object to a {@link PostgresVote} entity.
+     *
+     * @param domain The {@link VoteBO} domain object to be mapped.
+     * @return The corresponding {@link PostgresVote} entity.
+     */
     public static PostgresVote toEntity(VoteBO domain) {
         PostgresVote entity = new PostgresVote();
 
