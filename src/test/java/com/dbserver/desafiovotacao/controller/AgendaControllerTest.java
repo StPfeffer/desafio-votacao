@@ -62,7 +62,7 @@ class AgendaControllerTest {
 
     @Test
     void openAgenda_withinInvalidAgendaId() throws Exception {
-        this.mockMvc.perform(get("/api/v1/agendas/d9b82a9b-d9f4-4b48-b60b-f3ad59729449/open")
+        this.mockMvc.perform(post("/api/v1/agendas/d9b82a9b-d9f4-4b48-b60b-f3ad59729449/open")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$").isNotEmpty())
@@ -71,19 +71,19 @@ class AgendaControllerTest {
 
     @Test
     void openAgenda_alreadyOpen() throws Exception {
-        this.buildResultActionsForAgenda()
+        this.buildResultActionsForAgenda("d9b82a9b-d9f4-4b48-b60b-f3ad59729386")
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$").isNotEmpty())
                 .andExpect(jsonPath("$").isMap());
 
-        this.mockMvc.perform(post("/api/v1/agendas/d9b82a9b-d9f4-4b48-b60b-f3ad59729463/open")
+        this.mockMvc.perform(post("/api/v1/agendas/d9b82a9b-d9f4-4b48-b60b-f3ad59729386/open")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isNotEmpty())
                 .andExpect(jsonPath("$").isMap());
 
-        this.mockMvc.perform(post("/api/v1/agendas/d9b82a9b-d9f4-4b48-b60b-f3ad59729463/open")
+        this.mockMvc.perform(post("/api/v1/agendas/d9b82a9b-d9f4-4b48-b60b-f3ad59729386/open")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$").isNotEmpty())
@@ -130,8 +130,12 @@ class AgendaControllerTest {
     }
 
     private ResultActions buildResultActionsForAgenda() throws Exception {
+        return this.buildResultActionsForAgenda("d9b82a9b-d9f4-4b48-b60b-f3ad59729463");
+    }
+
+    private ResultActions buildResultActionsForAgenda(String agendaId) throws Exception {
         AgendaDTO agenda = new AgendaDTO();
-        agenda.setId("d9b82a9b-d9f4-4b48-b60b-f3ad59729463");
+        agenda.setId(agendaId);
         agenda.setTitle("Agenda title");
         agenda.setDescription("Agenda description");
 

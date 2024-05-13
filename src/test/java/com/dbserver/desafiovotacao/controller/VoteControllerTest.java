@@ -55,18 +55,18 @@ class VoteControllerTest {
 
     @Test
     void createVote_withinSameAssociatedId() throws Exception {
-        this.buildResultActionsForAgenda()
+        this.buildResultActionsForAgenda("d9b82a9b-d9f4-4b48-b60b-f3bd79729460")
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$").isNotEmpty())
                 .andExpect(jsonPath("$").isMap());
 
         VoteDTO vote = new VoteDTO();
-        vote.setAgendaId("d9b82a9b-d9f4-4b48-b60b-f3ad59729463");
+        vote.setAgendaId("d9b82a9b-d9f4-4b48-b60b-f3bd79729460");
         vote.setVoteType(EnumVoteType.YES);
-        vote.setAssociateId(UUID.randomUUID().toString());
+        vote.setAssociateId("d9b82a9b-d9f4-4b48-b60b-f4ad59587463");
 
-        this.mockMvc.perform(post("/api/v1/agendas/d9b82a9b-d9f4-4b48-b60b-f3ad59729463/open")
+        this.mockMvc.perform(post("/api/v1/agendas/d9b82a9b-d9f4-4b48-b60b-f3bd79729460/open")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isNotEmpty())
