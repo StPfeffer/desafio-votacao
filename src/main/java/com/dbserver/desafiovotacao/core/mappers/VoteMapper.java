@@ -5,6 +5,12 @@ import com.dbserver.desafiovotacao.core.entities.VoteBO;
 
 public class VoteMapper {
 
+    /**
+     * Maps a {@link VoteBO} object to a {@link VoteDTO} object.
+     *
+     * @param bo The {@link VoteBO} object to be mapped.
+     * @return The mapped {@link VoteDTO} object.
+     */
     public static VoteDTO toDTO(VoteBO bo) {
         VoteDTO dto = new VoteDTO();
 
@@ -16,6 +22,12 @@ public class VoteMapper {
         return dto;
     }
 
+    /**
+     * Maps a {@link VoteDTO} object to a {@link VoteBO} object.
+     *
+     * @param dto The {@link VoteDTO} object to be mapped.
+     * @return The mapped {@link VoteBO} object.
+     */
     public static VoteBO toBO(VoteDTO dto) {
         VoteBO bo = new VoteBO();
 

@@ -5,6 +5,12 @@ import com.dbserver.desafiovotacao.core.entities.AgendaOpenSessionRequestBO;
 
 public class AgendaOpenSessionRequestMapper {
 
+    /**
+     * Maps an {@link AgendaOpenSessionRequestBO} object to an {@link AgendaOpenSessionRequestDTO} object.
+     *
+     * @param bo The {@link AgendaOpenSessionRequestBO} object to be mapped.
+     * @return The mapped {@link AgendaOpenSessionRequestDTO} object.
+     */
     public static AgendaOpenSessionRequestDTO toDTO(AgendaOpenSessionRequestBO bo) {
         AgendaOpenSessionRequestDTO dto = new AgendaOpenSessionRequestDTO();
 
@@ -14,6 +20,12 @@ public class AgendaOpenSessionRequestMapper {
         return dto;
     }
 
+    /**
+     * Maps an {@link AgendaOpenSessionRequestDTO} object to an {@link AgendaOpenSessionRequestBO} object.
+     *
+     * @param dto The {@link AgendaOpenSessionRequestDTO} object to be mapped.
+     * @return The mapped {@link AgendaOpenSessionRequestBO} object.
+     */
     public static AgendaOpenSessionRequestBO toBO(AgendaOpenSessionRequestDTO dto) {
         AgendaOpenSessionRequestBO bo = new AgendaOpenSessionRequestBO();
 

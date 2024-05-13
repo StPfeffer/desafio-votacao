@@ -5,6 +5,12 @@ import com.dbserver.desafiovotacao.core.entities.AgendaBO;
 
 public class AgendaMapper {
 
+    /**
+     * Maps an {@link AgendaBO} object to an {@link AgendaDTO} object.
+     *
+     * @param bo The {@link AgendaBO} object to be mapped.
+     * @return The mapped {@link AgendaDTO} object.
+     */
     public static AgendaDTO toDTO(AgendaBO bo) {
         AgendaDTO dto = new AgendaDTO();
 
@@ -16,6 +22,12 @@ public class AgendaMapper {
         return dto;
     }
 
+    /**
+     * Maps an {@link AgendaDTO} object to an {@link AgendaBO} object.
+     *
+     * @param dto The {@link AgendaDTO} object to be mapped.
+     * @return The mapped {@link AgendaBO} object.
+     */
     public static AgendaBO toBO(AgendaDTO dto) {
         AgendaBO bo = new AgendaBO();
 

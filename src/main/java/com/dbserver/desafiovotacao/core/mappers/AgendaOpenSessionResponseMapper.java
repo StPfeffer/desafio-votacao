@@ -5,6 +5,12 @@ import com.dbserver.desafiovotacao.core.entities.AgendaOpenSessionResponseBO;
 
 public class AgendaOpenSessionResponseMapper {
 
+    /**
+     * Maps an {@link AgendaOpenSessionResponseBO} object to an {@link AgendaOpenSessionResponseDTO} object.
+     *
+     * @param bo The {@link AgendaOpenSessionResponseBO} object to be mapped.
+     * @return The mapped {@link AgendaOpenSessionResponseDTO} object.
+     */
     public static AgendaOpenSessionResponseDTO toDTO(AgendaOpenSessionResponseBO bo) {
         AgendaOpenSessionResponseDTO dto = new AgendaOpenSessionResponseDTO();
 
@@ -15,6 +21,12 @@ public class AgendaOpenSessionResponseMapper {
         return dto;
     }
 
+    /**
+     * Maps an {@link AgendaOpenSessionResponseDTO} object to an {@link AgendaOpenSessionResponseBO} object.
+     *
+     * @param dto The {@link AgendaOpenSessionResponseDTO} object to be mapped.
+     * @return The mapped {@link AgendaOpenSessionResponseBO} object.
+     */
     public static AgendaOpenSessionResponseBO toBO(AgendaOpenSessionResponseDTO dto) {
         AgendaOpenSessionResponseBO bo = new AgendaOpenSessionResponseBO();
 
